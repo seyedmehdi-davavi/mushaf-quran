@@ -1,144 +1,63 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#103d2d"><title>مصحف شریف عثمان طه</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0c4735">
+<title>مصحف عثمان طه | تلاوت آنلاین</title>
 <style>
-:root{--green:#174c37;--deep:#103526;--gold:#c9a64d;--paper:#fbf8ef;--ink:#202820;--muted:#6b746d;--line:#e3e7df;--card:#fff;--shadow:0 5px 18px #173b2610}
-*{box-sizing:border-box}body{margin:0;background:#f5f7f3;color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;min-height:100vh}button,input{font:inherit}button{cursor:pointer}header{position:sticky;top:0;z-index:2;background:linear-gradient(120deg,var(--deep),var(--green));color:#fff;padding:16px max(16px,calc((100vw - 900px)/2));box-shadow:0 3px 12px #0002;border-bottom:2px solid var(--gold);display:flex;align-items:center;justify-content:space-between;gap:10px}h1{font-size:1.14rem;margin:0}.about{border:1px solid #ffffff66;color:white;background:#ffffff12;border-radius:20px;padding:7px 12px}.wrap{max-width:900px;margin:auto;padding:14px 16px}.search{display:flex;gap:9px;margin-bottom:12px}.search input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:white;outline-color:var(--gold)}.count{color:var(--muted);font-size:.86rem;margin:4px 2px 12px}.list{display:grid;gap:9px;padding-bottom:30px}.card{border:1px solid #e1e8df;background:var(--card);border-radius:14px;padding:11px 13px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:var(--shadow);cursor:pointer}.card:hover,.card:focus{border-color:var(--gold);outline:none}.left{display:flex;align-items:center;gap:12px}.num{width:39px;height:39px;display:grid;place-items:center;border:1px solid var(--gold);border-radius:50%;background:#fcf7e8;color:var(--deep);font-weight:700}.name{font-weight:700;color:var(--deep)}.meta{display:block;color:var(--muted);font-size:.78rem;margin-top:3px}.arabic{font-family:"Noto Naskh Arabic","Traditional Arabic",serif;color:var(--green);font-size:1.2rem}.empty{text-align:center;padding:30px;color:var(--muted)}
-#reader{display:none;position:fixed;inset:0;z-index:5;background:var(--paper);flex-direction:column}.rhead{background:var(--deep);color:white;padding:11px 14px;display:flex;align-items:center;justify-content:space-between;gap:8px;border-bottom:2px solid var(--gold)}.rhead button,.rfoot button{border:1px solid #ffffff5c;border-radius:18px;padding:7px 11px;background:#ffffff15;color:inherit}.rtitle{font-weight:700;text-align:center}.rmeta{color:#f0d78e;font-size:.8rem;white-space:nowrap}.rcontent{overflow:auto;flex:1;padding:20px max(18px,calc((100vw - 760px)/2));font-family:"Noto Naskh Arabic","Traditional Arabic",serif;font-size:1.45rem;line-height:2.35;text-align:justify;user-select:text}.bism{font-size:1.55rem;text-align:center;color:var(--deep);padding:8px;margin:0 auto 20px;border-block:1px dashed var(--gold)}.verse{display:inline}.vnum{display:inline-grid;place-items:center;width:29px;height:29px;margin:0 4px;border:1px solid var(--gold);border-radius:50%;background:#fff;color:var(--green);font:700 .75rem system-ui;vertical-align:middle}.notice{font-family:system-ui,sans-serif;text-align:center;padding:22px 18px;border:1px solid #e6d9b5;background:#fffdf7;border-radius:14px;color:#555;line-height:1.9;font-size:.98rem}.rfoot{border-top:1px solid var(--line);padding:9px 14px;background:#fff;display:flex;justify-content:space-between;color:var(--deep)}.controls{display:flex;gap:7px}.rfoot button{border-color:#cbd2c9;background:#f7f8f6;color:var(--deep);border-radius:9px;min-width:40px}.aboutbox{position:fixed;inset:0;z-index:8;background:#0008;display:none;place-items:center;padding:20px}.dialog{max-width:440px;background:white;border-radius:16px;padding:22px;line-height:1.8}.dialog button{padding:8px 14px;background:var(--green);color:white;border:0;border-radius:8px}
-@media(min-width:650px){.list{grid-template-columns:1fr 1fr}.rcontent{font-size:1.55rem}}@media(max-width:400px){header{padding:12px}.arabic{font-size:1.03rem}.rtitle{font-size:.92rem}.rcontent{padding:16px;font-size:1.3rem}}
-</style></head><body>
-<header><h1>📖 مصحف شریف عثمان طه</h1><button class="about" id="aboutBtn">درباره</button></header>
-<main class="wrap"><div class="search"><input id="q" type="search" placeholder="جستجوی نام یا شمارهٔ سوره…" aria-label="جستجوی سوره"></div><div class="count" id="count"></div><div class="list" id="list"></div></main>
-<section id="reader" aria-label="نمای مطالعه"><div class="rhead"><button id="back">← بازگشت</button><div class="rtitle" id="rtitle"></div><div class="rmeta" id="rmeta"></div></div><article class="rcontent" id="content"></article><div class="rfoot"><div class="controls"><button id="bigger" aria-label="بزرگ‌نمایی متن">A+</button><button id="smaller" aria-label="کوچک‌نمایی متن">A−</button></div><button id="top">ابتدای متن ↑</button></div></section>
-<div class="aboutbox" id="aboutBox"><div class="dialog"><h2 style="margin-top:0">دربارهٔ این نسخه</h2><p>این صفحه کاملاً مستقل و آفلاین است و هیچ فونت یا سرویس خارجی بارگیری نمی‌کند. فهرست سوره‌ها آفلاین است. متن آیات فقط برای سوره‌هایی نمایش داده می‌شود که متن آن‌ها در دادهٔ ارائه‌شده موجود بود (فاتحه، اخلاص، فلق، ناس، کوثر و نصر). برای سایر سوره‌ها متن کامل در این فایل تعبیه نشده است.</p><button id="closeAbout">متوجه شدم</button></div></div>
+@import url('https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Vazirmatn:wght@400;500;700&display=swap');
+:root{--green:#0b4533;--green2:#126247;--gold:#d5b565;--paper:#fffdf4;--ink:#17150f;--muted:#d9e9df;--line:#c8aa61}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -10%,#247d5a,#0b4533 48%,#06291f);color:#f9f2d9;font-family:Vazirmatn,Tahoma,sans-serif;min-height:100vh}.app{max-width:1120px;margin:auto;padding:18px}.mast{text-align:center;margin:4px 0 16px}.mast h1{margin:0;color:#f2d98f;font-size:clamp(1.55rem,4vw,2.5rem)}.mast p{margin:5px 0;color:var(--muted);font-size:.85rem}.toolbar,.player{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center;padding:12px;border:1px solid #d5b56588;border-radius:14px;background:#ffffff10;box-shadow:0 8px 28px #001c1266;margin-bottom:10px}.toolbar label,.player label{font-size:.8rem;color:#f0dfaa}.toolbar input,.toolbar select,.player select{border:1px solid var(--line);border-radius:9px;padding:9px 10px;background:#faf8ee;color:#244536;font:inherit;min-width:145px}.toolbar input{width:105px;min-width:80px}.btn{border:1px solid #fff2b9;border-radius:9px;padding:9px 13px;background:linear-gradient(145deg,#fff0ad,#c99e42);color:#34250d;font:700 .82rem Vazirmatn;cursor:pointer}.btn.secondary{background:transparent;color:#f5dda0;border-color:#d5b565}.btn:disabled{opacity:.55;cursor:not-allowed}.status{text-align:center;min-height:26px;color:#f4df9e;font-size:.82rem}.status.error{color:#ffc9bd}.reader{position:relative;margin:8px auto 14px;max-width:930px;background:linear-gradient(135deg,#fffef8,#f7f0d8,#fffdf3);color:var(--ink);border:1px solid #b28a3c;border-radius:5px;padding:26px 34px 28px;box-shadow:0 22px 60px #001c16aa;min-height:430px;overflow:hidden}.reader:before,.reader:after{content:"";position:absolute;inset:9px;border:2px solid #b28a3c;pointer-events:none}.reader:after{inset:15px;border:1px solid #d7bd78}.pagehead{position:relative;z-index:1;text-align:center;color:#684b15;font-weight:700;border-bottom:1px solid #c9aa62;padding:6px 8px 12px;margin:0 8px 12px}.pagehead small{display:block;font-weight:400;margin-top:4px}.bismillah{text-align:center;position:relative;z-index:1;color:#705119;font:clamp(1.55rem,4vw,2.3rem)/1.7 'Amiri Quran',serif;margin:4px 0}.verses{position:relative;z-index:1;font:clamp(1.45rem,2vw + .75rem,2.25rem)/2.15 'Amiri Quran',serif;text-align:justify;text-align-last:center;direction:rtl}.ayah{display:inline;border-radius:5px;cursor:pointer;padding:2px 3px;transition:background .15s}.ayah:hover,.ayah.active{background:#e4eddc}.num{font-family:Vazirmatn;font-size:.55em;color:#9a7428;white-space:nowrap}.translation{display:none;color:#53685c;font:500 .95rem/2 Vazirmatn,Tahoma,sans-serif;text-align:right;border-right:2px solid #c9aa62;margin:4px 7px 12px;padding:3px 10px}.translation.show{display:block}.unavailable{text-align:center;color:#756944;font:1rem/2 Vazirmatn;padding:50px 12px}.foot{text-align:center;position:relative;z-index:1;margin-top:20px;color:#78591d;font-weight:700}.cover{display:none;max-width:930px;margin:0 auto 14px;text-align:center}.cover img{max-width:100%;max-height:72vh;border:8px solid #164d3a;border-radius:7px;box-shadow:0 12px 35px #001c16aa;background:#fff}.cover .zoom{margin-top:8px}.textmode .cover{display:none}.imagemode .reader{display:none}.imagemode .cover{display:block}.note{max-width:850px;margin:8px auto;text-align:center;color:#d7e7db;font-size:.73rem;line-height:1.9}.footer{color:#cbe0d3;text-align:center;font-size:.7rem;margin:15px auto 3px}.spin{opacity:.55}@media(max-width:600px){.app{padding:10px}.reader{padding:22px 18px;min-height:52vh}.verses{line-height:2.05}.toolbar input,.toolbar select,.player select{flex:1;min-width:125px}.btn{padding:9px 10px}.reader:before{inset:7px}.reader:after{inset:12px}}
+</style>
+</head>
+<body>
+<main class="app">
+<header class="mast"><h1>مصحف مدینه، روایت عثمان طه</h1><p>نمایش آنلاین متن قرآن، تصویر صفحه و تلاوت آیه‌به‌آیه</p></header>
+<section class="toolbar" aria-label="هدایت مصحف">
+<label for="page">صفحه</label><input id="page" type="number" min="1" max="604" value="1">
+<button class="btn" id="go">برو</button>
+<select id="surah" aria-label="انتخاب سوره"><option value="">انتخاب سوره</option></select>
+<button class="btn secondary" id="mode">نمایش تصویر صفحه</button>
+<button class="btn secondary" id="translate">ترجمه: خاموش</button>
+</section>
+<section class="player" aria-label="انتخاب قاری و سبک">
+<label for="reciter">قاری و سبک</label><select id="reciter"></select>
+<button class="btn" id="playPage">تلاوت پیوسته صفحه</button><button class="btn secondary" id="stop">توقف</button>
+</section>
+<p class="note" style="margin-top:-5px">فهرست، گزینه‌های شناخته‌شده/پیکربندی‌شده را نشان می‌دهد، نه تضمین پخش: پوشش «تحقیق» یا قاریان ایرانی در API ممکن است محدود باشد؛ دسترسی هر آیه هنگام درخواست سنجیده می‌شود و در صورت نبودن، پیام خطا می‌بینید.</p>
+<div id="status" class="status" role="status"></div>
+<section id="cover" class="cover"><img id="pageImage" alt="تصویر صفحه مصحف عثمان طه"><div class="zoom"><button class="btn secondary" id="zoomOut">−</button><button class="btn secondary" id="zoomReset">۱۰۰٪</button><button class="btn secondary" id="zoomIn">＋</button></div></section>
+<article id="reader" class="reader"><div id="head" class="pagehead">در حال دریافت…</div><div id="bismillah" class="bismillah"></div><div id="verses" class="verses"></div><div id="foot" class="foot"></div></article>
+<p class="note">متن و صوت از API عمومی <b>Al Quran Cloud</b> دریافت می‌شود. تصاویر صفحه از EveryAyah/مخزن عمومی صفحات استفاده می‌کنند. برای پخش، اتصال اینترنت و اجازهٔ مرورگر لازم است؛ در صورت نبودن صوت، پیام خطا نمایش داده می‌شود.</p>
+<p class="footer">منبع داده: alquran.cloud/v1 و everyayah.com | این فایل آفلاین نیست.</p>
+</main>
 <script>
-// اطلاعات سوره‌ها: شماره، نام فارسی، نام عربی، مکی/مدنی، شمار آیات، صفحه آغاز، جزء آغاز
-const raw=`فاتحه|الفاتحة|مکی|7|1|1
-بقره|البقرة|مدنی|286|2|1
-آل‌عمران|آل عمران|مدنی|200|50|3
-نساء|النساء|مدنی|176|77|4
-مائده|المائدة|مدنی|120|106|6
-انعام|الأنعام|مکی|165|128|7
-اعراف|الأعراف|مکی|206|151|8
-انفال|الأنفال|مدنی|75|177|9
-توبه|التوبة|مدنی|129|187|10
-یونس|يونس|مکی|109|208|11
-هود|هود|مکی|123|221|11
-یوسف|يوسف|مکی|111|235|12
-رعد|الرعد|مدنی|43|249|13
-ابراهیم|إبراهيم|مکی|52|255|13
-حجر|الحجر|مکی|99|262|14
-نحل|النحل|مکی|128|267|14
-اسراء|الإسراء|مکی|111|282|15
-کهف|الكهف|مکی|110|293|15
-مریم|مريم|مکی|98|305|16
-طه|طه|مکی|135|312|16
-انبیاء|الأنبياء|مکی|112|322|17
-حج|الحج|مدنی|78|332|17
-مؤمنون|المؤمنون|مکی|118|342|18
-نور|النور|مدنی|64|350|18
-فرقان|الفرقان|مکی|77|359|18
-شعراء|الشعراء|مکی|227|367|19
-نمل|النمل|مکی|93|377|19
-قصص|القصص|مکی|88|385|20
-عنکبوت|العنكبوت|مکی|69|396|20
-روم|الروم|مکی|60|404|21
-لقمان|لقمان|مکی|34|411|21
-سجده|السجدة|مکی|30|415|21
-احزاب|الأحزاب|مدنی|73|418|21
-سبأ|سبإ|مکی|54|428|22
-فاطر|فاطر|مکی|45|434|22
-یس|يس|مکی|83|440|22
-صافات|الصافات|مکی|182|446|23
-ص|ص|مکی|88|453|23
-زمر|الزمر|مکی|75|458|23
-غافر|غافر|مکی|85|467|24
-فصلت|فصلت|مکی|54|477|24
-شوری|الشورى|مکی|53|483|25
-زخرف|الزخرف|مکی|89|489|25
-دخان|الدخان|مکی|59|496|25
-جاثیه|الجاثية|مکی|37|499|25
-احقاف|الأحقاف|مکی|35|502|26
-محمد|محمد|مدنی|38|507|26
-فتح|الفتح|مدنی|29|511|26
-حجرات|الحجرات|مدنی|18|515|26
-ق|ق|مکی|45|518|26
-ذاریات|الذاريات|مکی|60|520|26
-طور|الطور|مکی|49|523|27
-نجم|النجم|مکی|62|526|27
-قمر|القمر|مکی|55|528|27
-الرحمن|الرحمن|مدنی|78|531|27
-واقعه|الواقعة|مکی|96|534|27
-حدید|الحديد|مدنی|29|537|27
-مجادله|المجادلة|مدنی|22|542|28
-حشر|الحشر|مدنی|24|545|28
-ممتحنه|الممتحنة|مدنی|13|549|28
-صف|الصف|مدنی|14|551|28
-جمعه|الجمعة|مدنی|11|553|28
-منافقون|المنافقون|مدنی|11|554|28
-تغابن|التغابن|مدنی|18|556|28
-طلاق|الطلاق|مدنی|12|558|28
-تحریم|التحريم|مدنی|12|560|28
-ملک|الملك|مکی|30|562|29
-قلم|القلم|مکی|52|564|29
-حاقه|الحاقة|مکی|52|566|29
-معارج|المعارج|مکی|44|568|29
-نوح|نوح|مکی|28|570|29
-جن|الجن|مکی|28|572|29
-مزمل|المزمل|مکی|20|574|29
-مدثر|المدثر|مکی|56|575|29
-قیامت|القيامة|مکی|40|577|29
-انسان|الإنسان|مدنی|31|578|29
-مرسلات|المرسلات|مکی|50|580|29
-نبأ|النبإ|مکی|40|582|30
-نازعات|النازعات|مکی|46|583|30
-عبس|عبس|مکی|42|585|30
-تکویر|التكوير|مکی|29|586|30
-انفطار|الانفطار|مکی|19|587|30
-مطففین|المطففين|مکی|36|587|30
-انشقاق|الانشقاق|مکی|25|589|30
-بروج|البروج|مکی|22|590|30
-طارق|الطارق|مکی|17|591|30
-اعلی|الأعلى|مکی|19|591|30
-غاشیه|الغاشية|مکی|26|592|30
-فجر|الفجر|مکی|30|593|30
-بلد|البلد|مکی|20|594|30
-شمس|الشمس|مکی|15|595|30
-لیل|الليل|مکی|21|595|30
-ضحی|الضحى|مکی|11|596|30
-شرح|الشرح|مکی|8|596|30
-تین|التين|مکی|8|597|30
-علق|العلق|مکی|19|597|30
-قدر|القدر|مکی|5|598|30
-بینه|البينة|مدنی|8|598|30
-زلزله|الزلزلة|مدنی|8|599|30
-عادیات|العاديات|مکی|11|599|30
-قارعه|القارعة|مکی|11|600|30
-تکاثر|التكاثر|مکی|8|600|30
-عصر|العصر|مکی|3|601|30
-همزه|الهمزة|مکی|9|601|30
-فیل|الفيل|مکی|5|601|30
-قریش|قريش|مکی|4|602|30
-ماعون|الماعون|مکی|7|602|30
-کوثر|الكوثر|مکی|3|602|30
-کافرون|الكافرون|مکی|6|603|30
-نصر|النصر|مدنی|3|603|30
-مسد|المسد|مکی|5|603|30
-اخلاص|الإخلاص|مکی|4|604|30
-فلق|الفلق|مکی|5|604|30
-ناس|الناس|مکی|6|604|30`;
-const surahs=raw.trim().split('\n').map((line,i)=>{const [name,arabic,type,ayahs,page,juz]=line.split('|');return{id:i+1,name,arabic,type,ayahs:+ayahs,page:+page,juz:+juz}});
-const texts={
-1:["بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ","ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَـٰلَمِينَ","ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ","مَـٰلِكِ يَوْمِ ٱلدِّينِ","إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ","ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ","صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ"],
-112:["قُلْ هُوَ ٱللَّهُ أَحَدٌ","ٱللَّهُ ٱلصَّمَدُ","لَمْ يَلِدْ وَلَمْ يُولَدْ","وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ"],
-113:["قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ","مِن شَرِّ مَا خَلَقَ","وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ","وَمِن شَرِّ ٱلنَّفَّـٰثَـٰتِ فِى ٱلْعُقَدِ","وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ"],
-114:["قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ","مَلِكِ ٱلنَّاسِ","إِلَـٰهِ ٱلنَّاسِ","مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ","ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ","مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ"],
-108:["إِنَّآ أَعْطَيْنَـٰكَ ٱلْكَوْثَرَ","فَصَلِّ لِرَبِّكَ وَٱنْحَرْ","إِنَّ شَانِئَكَ هُوَ ٱلْأَبْتَرُ"],
-110:["إِذَا جَآءَ نَصْرُ ٱللَّهِ وَٱلْفَتْحُ","وَرَأَيْتَ ٱلنَّاسَ يَدْخُلُونَ فِى دِينِ ٱللَّهِ أَفْوَاجًا","فَسَبِّحْ بِحَمْدِ رَبِّكَ وَٱسْتَغْفِرْهُ ۚ إِنَّهُۥ كَانَ تَوَّابًۢا"]};
-const list=document.getElementById('list'), q=document.getElementById('q'), reader=document.getElementById('reader'), content=document.getElementById('content');
-function render(){const term=q.value.trim().toLocaleLowerCase();const shown=surahs.filter(s=>s.name.toLocaleLowerCase().includes(term)||s.arabic.toLocaleLowerCase().includes(term)||String(s.id)===term);document.getElementById('count').textContent=`${shown.length} سوره از ۱۱۴ سوره`;list.replaceChildren();if(!shown.length){list.innerHTML='<div class="empty">سوره‌ای با این مشخصات پیدا نشد.</div>';return}for(const s of shown){const card=document.createElement('div');card.className='card';card.tabIndex=0;card.setAttribute('role','button');card.setAttribute('aria-label',`سوره ${s.name}`);const left=document.createElement('div');left.className='left';const number=document.createElement('div');number.className='num';number.textContent=s.id.toLocaleString('fa-IR');const details=document.createElement('div');details.innerHTML=`<span class="name"></span><span class="meta"></span>`;details.querySelector('.name').textContent=`سوره ${s.name}`;details.querySelector('.meta').textContent=`${s.type} • ${s.ayahs.toLocaleString('fa-IR')} آیه • صفحه ${s.page.toLocaleString('fa-IR')}`;left.append(number,details);const ar=document.createElement('div');ar.className='arabic';ar.textContent=s.arabic;card.append(left,ar);card.onclick=()=>openSurah(s);card.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openSurah(s)}};list.append(card)}}
-function openSurah(s){document.getElementById('rtitle').textContent=`سوره ${s.name} (${s.arabic})`;document.getElementById('rmeta').textContent=`جزء ${s.juz} • ص ${s.page}`;content.replaceChildren();if(texts[s.id]){if(s.id!==1&&s.id!==9){const b=document.createElement('div');b.className='bism';b.textContent='بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ';content.append(b)}texts[s.id].forEach((v,i)=>{const t=document.createElement('span');t.className='verse';t.textContent=v+' ';const n=document.createElement('span');n.className='vnum';n.textContent=(i+1).toLocaleString('ar-SA');n.setAttribute('aria-label',`آیه ${i+1}`);content.append(t,n,document.createTextNode(' '))})}else{const box=document.createElement('div');box.className='notice';box.textContent=`متن آیات سوره ${s.arabic} در دادهٔ آفلاین این فایل موجود نیست. فهرست و اطلاعات سوره در دسترس است، اما برای جلوگیری از نمایش محتوای نادرست، متن جایگزین یا ساختگی نشان داده نمی‌شود.`;content.append(box)}reader.style.display='flex';content.scrollTop=0;document.getElementById('back').focus()}
-q.addEventListener('input',render);document.getElementById('back').onclick=()=>reader.style.display='none';document.getElementById('top').onclick=()=>content.scrollTo({top:0,behavior:'smooth'});let size=1.45;document.getElementById('bigger').onclick=()=>{size=Math.min(2.2,size+.15);content.style.fontSize=size+'rem'};document.getElementById('smaller').onclick=()=>{size=Math.max(1,size-.15);content.style.fontSize=size+'rem'};document.getElementById('aboutBtn').onclick=()=>document.getElementById('aboutBox').style.display='grid';document.getElementById('closeAbout').onclick=()=>document.getElementById('aboutBox').style.display='none';document.getElementById('aboutBox').onclick=e=>{if(e.target.id==='aboutBox')e.currentTarget.style.display='none'};document.addEventListener('keydown',e=>{if(e.key==='Escape'){reader.style.display='none';document.getElementById('aboutBox').style.display='none'}});render();
-</script></body></html>
+'use strict';
+const API='https://api.alquran.cloud/v1';
+const PAGES='https://www.everyayah.com/data/images_png/';
+const names=['الفاتحة','البقرة','آل عمران','النساء','المائدة','الأنعام','الأعراف','الأنفال','التوبة','يونس','هود','يوسف','الرعد','إبراهيم','الحجر','النحل','الإسراء','الكهف','مريم','طه','الأنبياء','الحج','المؤمنون','النور','الفرقان','الشعراء','النمل','القصص','العنكبوت','الروم','لقمان','السجدة','الأحزاب','سبأ','فاطر','يس','الصافات','ص','الزمر','غافر','فصلت','الشورى','الزخرف','الدخان','الجاثية','الأحقاف','محمد','الفتح','الحجرات','ق','الذاريات','الطور','النجم','القمر','الرحمن','الواقعة','الحديد','المجادلة','الحشر','الممتحنة','الصف','الجمعة','المنافقون','التغابن','الطلاق','التحريم','الملك','القلم','الحاقة','المعارج','نوح','الجن','المزمل','المدثر','القيامة','الإنسان','المرسلات','النبأ','النازعات','عبس','التكوير','الانفطار','المطففين','الانشقاق','البروج','الطارق','الأعلى','الغاشية','الفجر','البلد','الشمس','الليل','الضحى','الشرح','التين','العلق','القدر','البينة','الزلزلة','العاديات','القارعة','التكاثر','العصر','الهمزة','الفيل','قريش','الماعون','الكوثر','الكافرون','النصر','المسد','الإخلاص','الفلق','الناس'];
+const surahPages=[1,2,50,77,106,128,151,177,187,208,221,235,249,255,262,267,282,293,305,312,322,332,342,350,359,367,377,385,396,404,411,415,418,428,434,440,446,453,458,467,477,483,489,496,499,502,507,511,515,518,520,523,526,528,531,534,537,542,545,549,551,553,554,556,558,560,562,564,566,568,570,572,574,575,577,578,580,582,583,585,586,587,587,589,590,591,592,594,595,595,596,596,597,597,598,598,599,599,600,600,601,601,601,602,602,602,603,603,603,604,604,604];
+const reciters=[
+ {id:'ar.minshawi',name:'مصر — محمد صدیق منشاوی | ترتیل',style:'ترتیل / Murattal',ok:'شناسهٔ رایج Al Quran Cloud؛ هنگام پخش آنلاین بررسی می‌شود.'},
+ {id:'ar.abdulbasitmurattal',name:'مصر — عبدالباسط عبدالصمد | ترتیل',style:'ترتیل / Murattal',ok:'شناسهٔ رایج Al Quran Cloud؛ هنگام پخش آنلاین بررسی می‌شود.'},
+ {id:'ar.abdulbasitmujawwad',name:'مصر — عبدالباسط عبدالصمد | تحقیق',style:'تحقیق / Mujawwad',ok:'شناسهٔ رایج Al Quran Cloud؛ هنگام پخش آنلاین بررسی می‌شود.'},
+ {id:'ar.parhizgar',name:'ایران — شهریار پرهیزگار | ترتیل',style:'ترتیل / Tartil',ok:'شناسهٔ موجود در ساختار قبلی برنامه؛ هنگام پخش آنلاین بررسی می‌شود.'}
+];
+const $=id=>document.getElementById(id), fa=n=>String(n).replace(/[0-9]/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
+let page=1, ayahs=[], showTranslation=false, audio=null, queue=[], qi=0, zoom=1, mode='text';
+function status(s,error=false){$('status').textContent=s;$('status').className='status'+(error?' error':'')}
+function setup(){names.forEach((n,i)=>{let o=document.createElement('option');o.value=i+1;o.textContent=fa(i+1)+' — '+n;$('surah').append(o)});reciters.forEach((r,i)=>{let o=document.createElement('option');o.value=i;o.textContent=r.name;$('reciter').append(o)});$('reciter').title=reciters[0].ok}
+function escape(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function pageImage(){let n=String(page).padStart(3,'0');$('pageImage').src=PAGES+n+'.png';$('pageImage').onerror=()=>{status('تصویر صفحه دریافت نشد؛ نمای متنی همچنان در دسترس است.',true)}}
+function render(data){ayahs=data.ayahs||[];$('head').innerHTML=escape(ayahs[0]?.surah?.name||'مصحف عثمان طه')+'<small>صفحهٔ '+fa(page)+' | آیات '+fa(ayahs[0]?.numberInSurah||'')+' تا '+fa(ayahs[ayahs.length-1]?.numberInSurah||'')+'</small>';$('foot').textContent='﴿ '+fa(page)+' ﴾';$('bismillah').textContent=ayahs[0]?.surah?.number!==9?'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ':'';$('verses').innerHTML='';ayahs.forEach(a=>{let span=document.createElement('span');span.className='ayah';span.tabIndex=0;span.innerHTML=escape(a.text)+' <span class="num">﴿'+fa(a.numberInSurah)+'﴾</span>';span.onclick=()=>playAyah(a,span);span.onkeydown=e=>{if(e.key==='Enter')playAyah(a,span)};$('verses').append(span);let tr=document.createElement('div');tr.className='translation';tr.dataset.number=a.number;tr.textContent='در حال دریافت ترجمه…';$('verses').append(tr)});if(showTranslation)loadTranslation();}
+async function load(){page=Math.max(1,Math.min(604,Number($('page').value)||1));$('page').value=page;$('reader').classList.add('spin');status('در حال دریافت متن صفحه…');try{let r=await fetch(API+'/page/'+page+'/quran-uthmani');if(!r.ok)throw Error('HTTP '+r.status);let j=await r.json();if(j.code!==200)throw Error('API');render(j.data);pageImage();status('صفحه '+fa(page)+' از منبع آنلاین بارگذاری شد.')}catch(e){ayahs=[];$('head').textContent='خطا در دریافت صفحه';$('verses').innerHTML='<div class="unavailable">این صفحه آنلاین دریافت نشد. اتصال اینترنت یا دسترسی API را بررسی کنید.</div>';status('دریافت متن ناموفق بود.',true)}finally{$('reader').classList.remove('spin')}}
+async function loadTranslation(){let els=[...document.querySelectorAll('.translation')];try{let r=await fetch(API+'/page/'+page+'/fa.makarem');if(!r.ok)throw Error();let j=await r.json();let map=new Map((j.data.ayahs||[]).map(a=>[a.number,a.text]));els.forEach(e=>e.textContent=map.get(Number(e.dataset.number))||'ترجمه برای این آیه موجود نیست.')}catch(e){els.forEach(e=>e.textContent='ترجمه آنلاین دریافت نشد.')}}
+function stop(){if(audio){audio.pause();audio.onended=null;audio=null}queue=[];qi=0;document.querySelectorAll('.ayah.active').forEach(x=>x.classList.remove('active'));status('تلاوت متوقف شد.')}
+async function fetchAudio(a){let id=reciters[$('reciter').value].id;let r=await fetch(API+'/ayah/'+a.number+'/'+id);if(!r.ok)throw Error('HTTP '+r.status);let j=await r.json();let url=j.data&&j.data.audio;if(!url)throw Error('no audio');return url}
+async function playAyah(a,el){stop();el.classList.add('active');status('در حال دریافت صوت آیهٔ '+fa(a.numberInSurah)+'…');try{let url=await fetchAudio(a);audio=new Audio(url);audio.onended=()=>el.classList.remove('active');audio.onerror=()=>status('پخش این صوت ممکن نشد؛ منبع آنلاین در دسترس نیست.',true);await audio.play();status(reciters[$('reciter').value].name+' — آیهٔ '+fa(a.numberInSurah))}catch(e){el.classList.remove('active');status('برای این قاری/آیه صوت قابل دریافت نیست؛ قاری دیگری را امتحان کنید.',true)}}
+async function nextAudio(){if(qi>=queue.length){status('تلاوت پیوستهٔ صفحه پایان یافت.');return}let a=queue[qi++];try{let url=await fetchAudio(a);audio=new Audio(url);audio.onended=nextAudio;audio.onerror=()=>status('خطا در پخش صوت پیوسته.',true);await audio.play();status('تلاوت پیوسته: آیهٔ '+fa(a.numberInSurah))}catch(e){status('صوت این قاری در این لحظه در دسترس نیست.',true)}}
+$('go').onclick=load;$('page').onkeydown=e=>{if(e.key==='Enter')load()};$('surah').onchange=e=>{if(e.target.value){$('page').value=surahPages[Number(e.target.value)-1];load();e.target.value=''}};$('translate').onclick=()=>{showTranslation=!showTranslation;$('translate').textContent='ترجمه: '+(showTranslation?'روشن':'خاموش');document.querySelectorAll('.translation').forEach(e=>e.classList.toggle('show',showTranslation));if(showTranslation)loadTranslation()};$('playPage').onclick=()=>{stop();queue=ayahs.slice();qi=0;if(queue.length)nextAudio();else status('آیه‌ای برای پخش وجود ندارد.',true)};$('stop').onclick=stop;$('mode').onclick=()=>{mode=mode==='text'?'image':'text';document.body.classList.toggle('imagemode',mode==='image');$('mode').textContent=mode==='image'?'نمایش متن و ترجمه':'نمایش تصویر صفحه';if(mode==='image')pageImage()};$('zoomIn').onclick=()=>{zoom=Math.min(2.5,zoom+.2);$('pageImage').style.width=(zoom*100)+'%'};$('zoomOut').onclick=()=>{zoom=Math.max(.5,zoom-.2);$('pageImage').style.width=(zoom*100)+'%'};$('zoomReset').onclick=()=>{zoom=1;$('pageImage').style.width='100%'};window.onkeydown=e=>{if(/INPUT|SELECT|TEXTAREA/.test(document.activeElement?.tagName||''))return;if(e.key==='ArrowLeft'){$('page').value=page+1;load()}if(e.key==='ArrowRight'){$('page').value=page-1;load()}};
+setup();load();
+</script>
+</body>
+</html>
